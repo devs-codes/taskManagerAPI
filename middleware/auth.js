@@ -20,13 +20,6 @@ exports.validateToken = async (req, res, next) => {
         // Verify and decode the token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        // Check if the user has admin role
-        if (decoded.role !== "admin") {
-            return res.status(403).json({
-                message: "Access forbidden. Admins only.",
-            });
-        }
-
         // Attach user info to request object
         req.user = decoded;
 
